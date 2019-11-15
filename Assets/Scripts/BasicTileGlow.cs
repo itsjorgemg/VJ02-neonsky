@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasicTileGlow : MonoBehaviour
 {
-    [SerializeField] private float iterationTime;
+    [SerializeField] private float iterationTime = 1.0f;
     private Color initialColor;
     private Material tileMaterial;
 
