@@ -5,7 +5,7 @@ using UnityEngine;
 public class JumpingTileBehavior : MonoBehaviour
 {
 
-    [SerializeField] private float jumpForce = 6;
+    [SerializeField] private float jumpForce = 3;
     // Start is called before the first frame update
     void Start()
     {

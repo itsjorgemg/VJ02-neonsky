@@ -45,17 +45,17 @@ public class LevelCreator : MonoBehaviour
 
     private void createTile (int zPos, int xPos, int tileType) {
         /*switch (tileType) {
-            case :
-                Instantiate(Resources.Load("Prefabs/BasicTile"), new Vector3(xPos, 0, zPos), Quaternion.identity);
+            case 1:
+                Instantiate((GameObject) Resources.Load("Prefabs/BasicTile"), new Vector3(xPos, 0, zPos), Quaternion.identity);
                 break;
             case 2:
-                Instantiate(Resources.Load("Prefabs/ObstacleWall"), new Vector3(xPos, 0, zPos), Quaternion.identity);
+                Instantiate((GameObject) Resources.Load("Prefabs/ObstacleWall"), new Vector3(xPos, 0, zPos), Quaternion.identity);
                 break;
             case 3:
-                Instantiate(Resources.Load("Prefabs/MovingTilePack"), new Vector3(xPos, 0, zPos), Quaternion.identity);
+                Instantiate((GameObject) Resources.Load("Prefabs/MovingTilePack"), new Vector3(xPos, 0, zPos), Quaternion.identity);
                 break;
             case 4:
-                Instantiate(Resources.Load("Prefabs/BlinkingTilePack"), new Vector3(xPos, 0, zPos), Quaternion.identity);
+                Instantiate((GameObject) Resources.Load("Prefabs/BlinkingTilePack"), new Vector3(xPos, 0, zPos), Quaternion.identity);
                 break;
             default:
                 break;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour {
+public class PlayerBehavior : MonoBehaviour {
 
-    public float speedForward = 5;
+    public static float speedForward = 5;
     public float speedSide = 6;
 
     // Start is called before the first frame update
@@ -22,5 +22,10 @@ public class PlayerMove : MonoBehaviour {
             transform.Translate(speedSide * Time.deltaTime, 0.0f, 0.0f);
         //Move forward
         transform.Translate(0.0f, 0.0f, speedForward * Time.deltaTime);
+    }
+
+    public void GameOver ()
+    {
+        transform.position = new Vector3(2, 0.3f, 0);
     }
 }

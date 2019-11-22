@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5454392949378897763
+--- !u!1 &6360573678164862155
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5454392949378897791}
-  - component: {fileID: 5454392949378897788}
-  - component: {fileID: 5454392949378897789}
-  - component: {fileID: 5454392949378897762}
-  - component: {fileID: 5869517435073043754}
-  - component: {fileID: 1299961981523984186}
+  - component: {fileID: 6360573678164862167}
+  - component: {fileID: 6360573678164862164}
+  - component: {fileID: 6360573678164862165}
+  - component: {fileID: 6360573678164862154}
+  - component: {fileID: 4791863469971680898}
+  - component: {fileID: -7318977741158509962}
   m_Layer: 0
-  m_Name: JumpingTile
+  m_Name: TravelTile
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5454392949378897791
+--- !u!4 &6360573678164862167
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5454392949378897763}
+  m_GameObject: {fileID: 6360573678164862155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
@@ -35,21 +35,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5454392949378897788
+--- !u!33 &6360573678164862164
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5454392949378897763}
+  m_GameObject: {fileID: 6360573678164862155}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5454392949378897789
+--- !u!23 &6360573678164862165
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5454392949378897763}
+  m_GameObject: {fileID: 6360573678164862155}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8358950a19d4b324eaf494d3d84aabb4, type: 2}
+  - {fileID: 2100000, guid: ee7821510e9b57c439abde3acf8c7b2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,42 +81,41 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5454392949378897762
+--- !u!65 &6360573678164862154
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5454392949378897763}
+  m_GameObject: {fileID: 6360573678164862155}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5869517435073043754
+--- !u!114 &4791863469971680898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5454392949378897763}
+  m_GameObject: {fileID: 6360573678164862155}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85a7cc3674556a849b2d3adc0876d8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iterationTime: 2
---- !u!114 &1299961981523984186
+--- !u!114 &-7318977741158509962
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5454392949378897763}
+  m_GameObject: {fileID: 6360573678164862155}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80ace825e9bab1a41afb264b82ca1aa9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c1f5264f0bab4f489603c4e69c31f42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 3

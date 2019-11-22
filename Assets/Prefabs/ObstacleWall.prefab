@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2485159603833158608}
   - component: {fileID: 2836009771856499817}
   - component: {fileID: 6721621387156136394}
+  - component: {fileID: 37116794346510852}
   m_Layer: 0
   m_Name: ObstacleTop
   m_TagString: LethalObstacle
@@ -88,7 +89,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736569075499530438}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -106,6 +107,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterationTime: 2
+--- !u!114 &37116794346510852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736569075499530438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de56b4c7a3da65b4ba2633d9cf96729d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4582825823056897278
 GameObject:
   m_ObjectHideFlags: 0
