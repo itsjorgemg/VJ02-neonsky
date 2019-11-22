@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour {
 
-    public static float speedForward = 5;
-    public float speedSide = 6;
+    public float speedForward = 5;
+    [SerializeField] private float speedSide = 6;
     private bool ghost = false;
     private Color iniColor;
     private Color ghostColor;

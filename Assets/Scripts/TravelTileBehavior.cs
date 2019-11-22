@@ -15,19 +15,23 @@ public class TravelTileBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (holdingObject != null) transform.Translate(0.0f, 0.0f, (PlayerBehavior.speedForward) * Time.deltaTime);
+        if (holdingObject != null) transform.Translate(0.0f, 0.0f, holdingObject.GetComponent<PlayerBehavior>().speedForward * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player")) holdingObject = collision.gameObject;
-        else if (collision.gameObject.CompareTag("Ground")) {
+        if (collision.gameObject.CompareTag("Ground")) {
             holdingObject = null;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player")) holdingObject = null;
+        if (other.gameObject.CompareTag("Player")) holdingObject = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player")) holdingObject = null;
     }
 }
