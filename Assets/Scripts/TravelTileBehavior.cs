@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class TravelTileBehavior : MonoBehaviour
 {
+
+    private GameObject holdingObject;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (holdingObject != null) transform.Translate(0.0f, 0.0f, (PlayerBehavior.speedForward) * Time.deltaTime);
     }
 
-    /*private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.gameObject.tag == "Player") transform.Translate(0.0f, 0.0f, PlayerMove.speedForward * Time.deltaTime);
-    }*/
+        if (collision.gameObject.CompareTag("Player")) holdingObject = collision.gameObject;
+        else if (collision.gameObject.CompareTag("Ground")) {
+            holdingObject = null;
+        }
+    }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
-        if (collision.transform.gameObject.CompareTag("Player")) transform.Translate(0.0f, 0.0f, (PlayerBehavior.speedForward - 0.5f) * Time.deltaTime);
+        if (collision.gameObject.CompareTag("Player")) holdingObject = null;
     }
 }
