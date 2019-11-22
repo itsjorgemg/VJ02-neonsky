@@ -708,8 +708,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 656729975}
-  offset: {x: 0, y: 1, z: -1.25}
-  angle: 20
+  offset: {x: 0, y: 3, z: -2.25}
+  angle: 30
+  speed: 4
 --- !u!1001 &3358011144725787882
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,18 +5,23 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour {
 
     public GameObject objectToFollow;
-    public Vector3 offset = new Vector3(0.0f, 1.0f, -1.25f);
-    public float angle = 20;
+    public Vector3 offset = new Vector3(0.0f, 3f, -2.25f);
+    public float angle = 30;
+    [SerializeField] private float speed = 4;
 
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = objectToFollow.transform.position + offset;
         transform.Rotate(angle, 0.0f, 0.0f, Space.Self);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = objectToFollow.transform.position + offset;
+        transform.position = new Vector3(transform.position.x, transform.position.y, objectToFollow.transform.position.z + offset.z);
+        transform.position = Vector3.Lerp(transform.position,
+                                        objectToFollow.transform.position - new Vector3(0, objectToFollow.transform.position.y, 0) + offset, 
+                                        Time.deltaTime * speed);
     }
 }
