@@ -18,6 +18,6 @@ public class ObstacleBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") other.GetComponent<PlayerBehavior>().GameOver();
+        if (other.gameObject.tag == "Player") other.GetComponent<PlayerBehavior>().ObstacleHit();
     }
 }

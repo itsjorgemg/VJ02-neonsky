@@ -23,6 +23,6 @@ public class TravelTileBehavior : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.transform.gameObject.tag == "Player") transform.Translate(0.0f, 0.0f, (PlayerBehavior.speedForward - 0.5f) * Time.deltaTime);
+        if (collision.transform.gameObject.CompareTag("Player")) transform.Translate(0.0f, 0.0f, (PlayerBehavior.speedForward - 0.5f) * Time.deltaTime);
     }
 }
