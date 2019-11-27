@@ -6,19 +6,22 @@ public class PlayerBehavior : MonoBehaviour {
 
     public float speedForward = 5;
     [SerializeField] private float speedSide = 6;
+    private float ghostFadeDuration = 0.5f;
+    private float ghostActiveDuration = 1.0f;
+    private float ghostAlpha = 0.5f;
+    
+    private IEnumerator fadeCoroutine;
     private bool ghost = false;
     private Color iniColor;
     private Color ghostColor;
-    private Color targetColor;
     private float iniGhostTime;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        iniColor = GetColor();
-        ghostColor = new Color(iniColor.r, iniColor.g, iniColor.b, 0.5f);
-        targetColor = iniColor;
+        iniColor = gameObject.GetComponent<MeshRenderer>().material.color;
+        ghostColor = new Color(iniColor.r, iniColor.g, iniColor.b, ghostAlpha);
     }
 
     // Update is called once per frame
@@ -32,8 +35,7 @@ public class PlayerBehavior : MonoBehaviour {
         //Move forward
         transform.Translate(0.0f, 0.0f, speedForward * Time.deltaTime);
 
-        if (ghost && (Time.time - iniGhostTime) >= 1) SetGhost(false);
-        SetColor(Color.Lerp(GetColor(), targetColor, 1 * Time.deltaTime));
+        if (ghost && (Time.time - iniGhostTime) >= ghostActiveDuration) SetGhost(false);
     }
 
     public void ObstacleHit ()
@@ -49,17 +51,20 @@ public class PlayerBehavior : MonoBehaviour {
     public void SetGhost(bool b)
     {
         ghost = b;
-        targetColor = b ? ghostColor : iniColor;
         iniGhostTime = Time.time;
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+        fadeCoroutine = Fade(b);
+        StartCoroutine(fadeCoroutine);
     }
 
-    private Color GetColor()
+    IEnumerator Fade(bool b)
     {
-        return gameObject.GetComponent<MeshRenderer>().material.color;
-    }
-
-    private void SetColor(Color color)
-    {
-        gameObject.GetComponent<MeshRenderer>().material.color = color;
+        Color startColor = b ? iniColor : ghostColor;
+        Color endColor = b ? ghostColor : iniColor;
+        for (var t = 0f; t < ghostFadeDuration; t += Time.deltaTime) {
+            gameObject.GetComponent<MeshRenderer>().material.color = Color.Lerp(startColor, endColor, t / ghostFadeDuration);
+            yield return null;
+        }
     }
 }
