@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoppingTileBehavior : MonoBehaviour
 {
 
-    private float fadeInDuration = 0.8f;
+    private float fadeInDuration = 0.5f;
     private float fadeInDistance = 4.0f;
 
     IEnumerator fadeInCoroutine;
