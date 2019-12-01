@@ -28,7 +28,7 @@ public class PlayerBehavior : MonoBehaviour {
         iniColor = gameObject.GetComponent<MeshRenderer>().material.color;
         ghostColor = new Color(iniColor.r, iniColor.g, iniColor.b, ghostAlpha);
         iniScale = transform.localScale;
-        moveSideScale = iniScale - new Vector3(iniScale.x / 6, 0, 0);
+        moveSideScale = iniScale - new Vector3(iniScale.x / 8, 0, 0);
     }
 
     // Update is called once per frame
