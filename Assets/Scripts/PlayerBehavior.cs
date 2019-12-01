@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour {
 
     public float speedForward = 5;
-    [SerializeField] private float speedSide = 6;
+    private float acceleration;
+    [SerializeField] private float maxSpeedSide = 6;
     private float ghostFadeDuration = 0.5f;
     private float ghostActiveDuration = 1.0f;
     private float ghostAlpha = 0.5f;
@@ -28,10 +29,18 @@ public class PlayerBehavior : MonoBehaviour {
     void Update()
     {
         //Move sidewise
+        if (Input.GetKeyUp(KeyCode.LeftArrow) | Input.GetKeyUp(KeyCode.RightArrow)) acceleration = 0;
         if (Input.GetKey(KeyCode.LeftArrow))
-            transform.Translate(-speedSide * Time.deltaTime, 0.0f, 0.0f);
+        {
+            if (acceleration < maxSpeedSide) acceleration = Mathf.Lerp(acceleration, maxSpeedSide, Time.deltaTime * 5);
+            transform.Translate(-acceleration * Time.deltaTime, 0.0f, 0.0f);
+        }
         if (Input.GetKey(KeyCode.RightArrow))
-            transform.Translate(speedSide * Time.deltaTime, 0.0f, 0.0f);
+        {
+            if (acceleration < maxSpeedSide) acceleration = Mathf.Lerp(acceleration, maxSpeedSide, Time.deltaTime * 5);
+            transform.Translate(acceleration * Time.deltaTime, 0.0f, 0.0f);
+        }
+
         //Move forward
         transform.Translate(0.0f, 0.0f, speedForward * Time.deltaTime);
 
