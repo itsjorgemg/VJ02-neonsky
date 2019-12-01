@@ -5,33 +5,37 @@ using UnityEngine;
 public class PoppingTileBehavior : MonoBehaviour
 {
 
+    private float fadeInDuration = 0.5f;
+    private float fadeInDistance = 4.0f;
+
+    IEnumerator fadeInCoroutine;
     private GameObject player;
     private Color iniColor;
-    private Color currentColor;
+    private Color transparentColor;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        iniColor = GetColor();
-        currentColor = new Color(iniColor.r, iniColor.g, iniColor.b, 0.0f);
-        SetColor(currentColor);
+        iniColor = gameObject.GetComponent<MeshRenderer>().material.color;
+        transparentColor = new Color(iniColor.r, iniColor.g, iniColor.b, 0.0f);
+        gameObject.GetComponent<MeshRenderer>().material.color = transparentColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= 4)
-            SetColor(Color.Lerp (GetColor(), iniColor, 3 * Time.deltaTime));
+        if (fadeInCoroutine == null && Vector3.Distance(player.transform.position, transform.position) <= fadeInDistance) {
+            fadeInCoroutine = FadeIn();
+            StartCoroutine(fadeInCoroutine);
+        }
     }
 
-    private Color GetColor()
+    IEnumerator FadeIn()
     {
-        return gameObject.GetComponent<MeshRenderer>().material.color;
-    }
-
-    private void SetColor(Color color)
-    {
-        gameObject.GetComponent<MeshRenderer>().material.color = color;
+        for (var t = 0f; t < fadeInDuration; t += Time.deltaTime) {
+            gameObject.GetComponent<MeshRenderer>().material.color = Color.Lerp(transparentColor, iniColor, t / fadeInDuration);
+            yield return null;
+        }
     }
 }

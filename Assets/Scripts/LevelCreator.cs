@@ -29,21 +29,22 @@ public class LevelCreator : MonoBehaviour
 
     private void createRow (int zPos, string rowInfo) {
         switch (rowInfo[0]) {
-            case '3':
-                createTile(zPos, 0, rowInfo[0] - '0');
+            case 'c':
+                createTile(zPos, 0, rowInfo[0] - 'a');
                 break;
-            case '4':
-                createTile(zPos, 0, rowInfo[0] - '0');
+            case 'd':
+                createTile(zPos, 0, rowInfo[0] - 'a');
                 break;
             default:
                 for (int j = 0; j < 5; ++j) {
-                    createTile(zPos, j, rowInfo[j] - '0');
+                    createTile(zPos, j, rowInfo[j] - 'a');
                 }
                 break;
         }
     }
 
     private void createTile (int zPos, int xPos, int tileType) {
-        if (tileType > 0) Instantiate(tiles[tileType - 1], new Vector3(xPos, 0, zPos), Quaternion.identity);
+        if (tileType >= 0 && tileType < tiles.Length)
+            Instantiate(tiles[tileType], new Vector3(xPos, 0, zPos), Quaternion.identity);
     }
 }

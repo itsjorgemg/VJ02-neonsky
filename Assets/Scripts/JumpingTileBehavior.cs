@@ -18,8 +18,9 @@ public class JumpingTileBehavior : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.transform.gameObject.CompareTag("Player")) collision.rigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        if (other.CompareTag("Player"))
+            other.attachedRigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
     }
 }
