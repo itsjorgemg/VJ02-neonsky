@@ -197,6 +197,16 @@ PrefabInstance:
       propertyPath: speedSide
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -6386052111423535963, guid: 53c520c1ab2340144bc5b3bee4e2b509,
+        type: 3}
+      propertyPath: maxAccSide
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6386052111423535963, guid: 53c520c1ab2340144bc5b3bee4e2b509,
+        type: 3}
+      propertyPath: accelerationRate
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: -7835126745300069727, guid: 53c520c1ab2340144bc5b3bee4e2b509,
         type: 3}
       propertyPath: m_IsKinematic

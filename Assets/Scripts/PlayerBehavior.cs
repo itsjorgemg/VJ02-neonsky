@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour {
 
     public float speedForward = 5;
-    private float acceleration;
-    [SerializeField] private float maxSpeedSide = 6;
+    private float currentAcceleration = 0;
+    [SerializeField] private float maxAccSide = 6;
+    [SerializeField] private float accelerationRate = 20;
     private float ghostFadeDuration = 0.5f;
     private float ghostActiveDuration = 1.0f;
     private float ghostAlpha = 0.5f;
@@ -17,29 +18,41 @@ public class PlayerBehavior : MonoBehaviour {
     private Color ghostColor;
     private float iniGhostTime;
 
+    private Vector3 iniScale;
+    private Vector3 moveSideScale;
+
     // Start is called before the first frame update
     void Start()
     {
 
         iniColor = gameObject.GetComponent<MeshRenderer>().material.color;
         ghostColor = new Color(iniColor.r, iniColor.g, iniColor.b, ghostAlpha);
+        iniScale = transform.localScale;
+        moveSideScale = iniScale - new Vector3(iniScale.x / 6, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         //Move sidewise
-        if (Input.GetKeyUp(KeyCode.LeftArrow) | Input.GetKeyUp(KeyCode.RightArrow)) acceleration = 0;
+        if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+        {
+            if (Mathf.Abs(currentAcceleration) < 0.1) currentAcceleration = 0;
+            if (currentAcceleration < 0) currentAcceleration += Time.deltaTime * accelerationRate / 1.25f;
+            else if (currentAcceleration > 0) currentAcceleration -= Time.deltaTime * accelerationRate / 1.25f;
+            MoveSideScale(false);
+        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (acceleration < maxSpeedSide) acceleration = Mathf.Lerp(acceleration, maxSpeedSide, Time.deltaTime * 5);
-            transform.Translate(-acceleration * Time.deltaTime, 0.0f, 0.0f);
+            if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration > 0) currentAcceleration -= Time.deltaTime * accelerationRate;
+            MoveSideScale(true);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (acceleration < maxSpeedSide) acceleration = Mathf.Lerp(acceleration, maxSpeedSide, Time.deltaTime * 5);
-            transform.Translate(acceleration * Time.deltaTime, 0.0f, 0.0f);
+            if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration < 0) currentAcceleration += Time.deltaTime * accelerationRate;
+            MoveSideScale(true);
         }
+        transform.Translate(currentAcceleration * Time.deltaTime, 0.0f, 0.0f);
 
         //Move forward
         transform.Translate(0.0f, 0.0f, speedForward * Time.deltaTime);
@@ -75,5 +88,11 @@ public class PlayerBehavior : MonoBehaviour {
             gameObject.GetComponent<MeshRenderer>().material.color = Color.Lerp(startColor, endColor, t / ghostFadeDuration);
             yield return null;
         }
+    }
+
+    private void MoveSideScale (bool b)
+    {
+        if (b) transform.localScale = Vector3.Lerp(transform.localScale, moveSideScale, Time.deltaTime * maxAccSide);
+        else transform.localScale = Vector3.Lerp(transform.localScale, iniScale, Time.deltaTime * maxAccSide);
     }
 }
