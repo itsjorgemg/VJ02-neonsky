@@ -21,6 +21,9 @@ public class PlayerBehavior : MonoBehaviour {
     private Vector3 iniScale;
     private Vector3 moveSideScale;
 
+    private GameObject gameOverPanel;
+    private bool paused = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +32,17 @@ public class PlayerBehavior : MonoBehaviour {
         ghostColor = new Color(iniColor.r, iniColor.g, iniColor.b, ghostAlpha);
         iniScale = transform.localScale;
         moveSideScale = iniScale - new Vector3(iniScale.x / 8, 0, 0);
+
+        GameObject hud = GameObject.FindGameObjectWithTag("HUD");
+        gameOverPanel = hud.GetComponentsInChildren<Transform>()[1].gameObject;
+        gameOverPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (paused) return;
+
         //Move sidewise
         if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
         {
@@ -56,6 +65,7 @@ public class PlayerBehavior : MonoBehaviour {
 
         //Move forward
         transform.Translate(0.0f, 0.0f, speedForward * Time.deltaTime);
+        if (transform.position.y < -5) GameOver();
 
         if (ghost && (Time.time - iniGhostTime) >= ghostActiveDuration) SetGhost(false);
     }
@@ -67,7 +77,8 @@ public class PlayerBehavior : MonoBehaviour {
 
     public void GameOver()
     {
-        transform.position = new Vector3(2, 0.3f, 0);
+        paused = true;
+        gameOverPanel.SetActive(true);
     }
 
     public void SetGhost(bool b)
