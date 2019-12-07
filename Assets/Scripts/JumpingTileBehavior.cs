@@ -9,7 +9,6 @@ public class JumpingTileBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -20,7 +19,9 @@ public class JumpingTileBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) {
+            gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
             other.attachedRigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        }
     }
 }

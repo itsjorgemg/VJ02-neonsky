@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour {
 
     public GameObject objectToFollow;
-    public Vector3 offset = new Vector3(0.0f, 3f, -2.25f);
+    public Vector3 offset = new Vector3(0.0f, 4f, -3.25f);
     public float angle = 30;
     [SerializeField] private float speed = 4;
 

@@ -23,6 +23,8 @@ public class DoorTileBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
+        gameObject.GetComponentsInParent<Transform>()[1].GetComponentsInChildren<AudioSource>()[0].Play();
         if (fadeOutCoroutine == null && collision.gameObject.CompareTag("Player")) {
             fadeOutCoroutine = FadeOut();
             StartCoroutine(fadeOutCoroutine);
