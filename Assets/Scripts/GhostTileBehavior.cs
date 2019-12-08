@@ -18,6 +18,7 @@ public class GhostTileBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
         if (collision.gameObject.CompareTag("Player")) collision.gameObject.GetComponent<PlayerBehavior>().SetGhost(true);
     }
 }

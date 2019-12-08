@@ -33,6 +33,7 @@ public class PoppingTileBehavior : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
         for (var t = 0f; t < fadeInDuration; t += Time.deltaTime) {
             gameObject.GetComponent<MeshRenderer>().material.color = Color.Lerp(transparentColor, iniColor, t / fadeInDuration);
             yield return null;

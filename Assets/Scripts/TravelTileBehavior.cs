@@ -27,11 +27,18 @@ public class TravelTileBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) holdingObject = other.gameObject;
+        if (other.gameObject.CompareTag("Player")) {
+            gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
+            holdingObject = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) holdingObject = null;
+        if (other.gameObject.CompareTag("Player")) {
+            gameObject.GetComponentsInChildren<AudioSource>()[0].Stop();
+            gameObject.GetComponentsInChildren<AudioSource>()[1].Play();
+            holdingObject = null;
+        }
     }
 }
