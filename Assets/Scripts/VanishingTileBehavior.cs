@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VanishingTileBehavior : MonoBehaviour
 {
-    private float fadeOutDuration = 0.75f;
+    private float fadeOutDuration = 0.5f;
     private bool trigger = false;
 
     IEnumerator fadeOutCoroutine;
@@ -46,7 +46,7 @@ public class VanishingTileBehavior : MonoBehaviour
         for (var t = 0f; t < fadeOutDuration; t += Time.deltaTime) {
             for (int i = 0; i < 5; ++i) {
                 gameObject.GetComponentsInChildren<MeshRenderer>()[i].material.color = Color.Lerp(iniColor, transparentColor, t / fadeOutDuration);
-                if (Time.time - timeIniVanish >= 0.75) gameObject.GetComponentsInChildren<BoxCollider>()[i+1].enabled = false;
+                if (Time.time - timeIniVanish >= fadeOutDuration) gameObject.GetComponentsInChildren<BoxCollider>()[i].enabled = false;
             }
             yield return null;
         }
