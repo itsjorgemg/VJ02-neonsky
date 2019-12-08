@@ -33,9 +33,9 @@ public class VanishingTileBehavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (!trigger) {
+                gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
                 timeIniVanish = Time.time;
                 trigger = true;
-                //gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
                 for (int i = 0; i < 5; ++i) gameObject.GetComponentsInChildren<MeshRenderer>()[i].material.color = iniColor;
             }
         }
@@ -43,7 +43,6 @@ public class VanishingTileBehavior : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        //gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
         for (var t = 0f; t < fadeOutDuration; t += Time.deltaTime) {
             for (int i = 0; i < 5; ++i) {
                 gameObject.GetComponentsInChildren<MeshRenderer>()[i].material.color = Color.Lerp(iniColor, transparentColor, t / fadeOutDuration);
