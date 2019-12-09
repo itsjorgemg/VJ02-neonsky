@@ -10,6 +10,8 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] private FileInfo sourceFile = new FileInfo("Assets/Levels/Level1.txt");
     [SerializeField] private GameObject[] tiles;
 
+    public int levelLength = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class LevelCreator : MonoBehaviour
         for (int i = 0; text != null; ++i) {
             createRow(i, text);
             text = reader.ReadLine();
+            levelLength = i;
         }
     }
 
