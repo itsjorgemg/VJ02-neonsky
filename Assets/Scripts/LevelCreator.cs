@@ -15,6 +15,7 @@ public class LevelCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sourceFile = new FileInfo("Assets/Levels/Level" + GameManager.instance.GetCurrentLevel() + ".txt");
         StreamReader reader = sourceFile.OpenText();
         string text = reader.ReadLine();
 
