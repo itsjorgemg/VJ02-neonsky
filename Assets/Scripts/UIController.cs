@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class UIController : MonoBehaviour
             Destroy(gameObject);
         }
         
+        gameOverPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
         gameOverPanel.SetActive(false);
         HUDPanel.SetActive(true);
         SetProgress(0);

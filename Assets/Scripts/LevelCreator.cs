@@ -9,13 +9,16 @@ public class LevelCreator : MonoBehaviour
 
     [SerializeField] private FileInfo sourceFile = new FileInfo("Assets/Levels/Level1.txt");
     [SerializeField] private GameObject[] tiles;
+    [SerializeField] private GameObject destinationObject;
 
-    public int levelLength = 0;
+    public int levelLength { get; private set; } = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        sourceFile = new FileInfo("Assets/Levels/Level" + GameManager.instance.GetCurrentLevel() + ".txt");
+        if (GameManager.instance != null)
+            sourceFile = new FileInfo("Assets/Levels/Level" + GameManager.instance.currentLevel + ".txt");
+        
         StreamReader reader = sourceFile.OpenText();
         string text = reader.ReadLine();
 
@@ -48,6 +51,6 @@ public class LevelCreator : MonoBehaviour
 
     private void createTile (int zPos, int xPos, int tileType) {
         if (tileType >= 0 && tileType < tiles.Length)
-            Instantiate(tiles[tileType], new Vector3(xPos, 0, zPos), Quaternion.identity);
+            Instantiate(tiles[tileType], new Vector3(xPos, 0, zPos), Quaternion.identity, destinationObject.transform);
     }
 }
