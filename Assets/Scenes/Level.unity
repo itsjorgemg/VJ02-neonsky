@@ -1974,7 +1974,7 @@ MonoBehaviour:
   - {fileID: 6936822745288808843, guid: e155732a6009d2f489d2c28e1351d2c5, type: 3}
   - {fileID: 8790487509671205995, guid: b3b778fac4f193048975390a493e2867, type: 3}
   collectibles:
-  - {fileID: 7471155419524349065, guid: ce5f8dd50579b744c9878496292bef7a, type: 3}
+  - {fileID: 502479206996404365, guid: ce5f8dd50579b744c9878496292bef7a, type: 3}
   destinationObject: {fileID: 930244634}
 --- !u!1 &2090374943
 GameObject:

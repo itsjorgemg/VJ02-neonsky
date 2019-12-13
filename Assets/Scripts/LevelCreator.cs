@@ -9,6 +9,7 @@ public class LevelCreator : MonoBehaviour
 
     [SerializeField] private FileInfo sourceFile = new FileInfo("Assets/Levels/Level1.txt");
     [SerializeField] private GameObject[] tiles;
+    [SerializeField] private GameObject[] collectibles;
     [SerializeField] private GameObject destinationObject;
 
     public int levelLength { get; private set; } = 0;
@@ -42,15 +43,30 @@ public class LevelCreator : MonoBehaviour
                 createTile(zPos, 0, rowInfo[0] - 'a');
                 break;
             default:
-                for (int j = 0; j < 5; ++j) {
-                    createTile(zPos, j, rowInfo[j] - 'a');
+                for (int i = 0; i < 5; i++) {
+                    createTile(zPos, i, rowInfo[i] - 'a');
                 }
                 break;
+        }
+        for (int i = 5; i < Mathf.Min(10, rowInfo.Length); i++) {
+            switch (rowInfo[i]) {
+                case '.':
+                    createCollectible(zPos, i - 5, 0);
+                    break;
+            }
         }
     }
 
     private void createTile (int zPos, int xPos, int tileType) {
         if (tileType >= 0 && tileType < tiles.Length)
             Instantiate(tiles[tileType], new Vector3(xPos, 0, zPos), Quaternion.identity, destinationObject.transform);
+    }
+
+    private void createCollectible (int zPos, int xPos, int collectibleType) {
+        GameObject g;
+        if (collectibleType >= 0 && collectibleType < tiles.Length) {
+            g = Instantiate(collectibles[collectibleType], destinationObject.transform);
+            g.transform.position += new Vector3(xPos, 0, zPos);
+        }
     }
 }

@@ -69,16 +69,11 @@ public class PlayerBehavior : MonoBehaviour {
         if (transform.position.y < -5) GameOver();
 
         if (ghost && (Time.time - iniGhostTime) >= ghostActiveDuration) SetGhost(false);
-
-        //GetComponent<TrailRenderer>().colorGradient = new Gradient()
     }
 
     public void ObstacleHit ()
     {
-        if (!ghost) {
-            GameOver();
-            GetComponent<Rigidbody>().AddForce(0, 0, dyingForce, ForceMode.Impulse);
-        }
+        if (!ghost) GameOver();
     }
 
     public void GameOver()
@@ -95,6 +90,10 @@ public class PlayerBehavior : MonoBehaviour {
             StopCoroutine(fadeCoroutine);
         fadeCoroutine = Fade(b);
         StartCoroutine(fadeCoroutine);
+    }
+
+    public void AddCoin() {
+        Debug.Log("COIN!");
     }
 
     IEnumerator Fade(bool b)
