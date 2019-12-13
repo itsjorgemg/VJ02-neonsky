@@ -41,6 +41,7 @@ public class UIController : MonoBehaviour
 
     public void SetGameOverPanel(bool b) {
         gameOverPanel.SetActive(b);
+        if (b) mainCamera.GetComponent<CameraMove>().shake = true;
     }
 
     public void SetProgress(float percent) {

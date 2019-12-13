@@ -8,6 +8,8 @@ public class CameraMove : MonoBehaviour {
     public Vector3 offset = new Vector3(0.0f, 4f, -3.25f);
     public float angle = 30;
     [SerializeField] private float speed = 4;
+    private float shakeDuration = 0.5f;
+    public bool shake = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +26,14 @@ public class CameraMove : MonoBehaviour {
         transform.position = Vector3.Lerp(transform.position,
                                         objectToFollow.transform.position - new Vector3(0, objectToFollow.transform.position.y, 0) + offset, 
                                         Time.deltaTime * speed);
+        if (shake) {
+            if (shakeDuration > 0) {
+                transform.position += Random.insideUnitSphere * 0.1f;
+                shakeDuration -= Time.deltaTime;
+            } else {
+                shakeDuration = 0.5f;
+                shake = false;
+            }
+        }
     }
 }

@@ -35,12 +35,17 @@ public class VanishingTileBehavior : MonoBehaviour
     IEnumerator FadeOut()
     {
         for (var t = 0f; t < fadeOutDuration; t += Time.deltaTime) {
-            foreach (var renderer in gameObject.GetComponentsInChildren<MeshRenderer>())
+            foreach (var renderer in gameObject.GetComponentsInChildren<MeshRenderer>()) {
                 renderer.material.color = Color.Lerp(iniColor, transparentColor, t / fadeOutDuration);
+                Vector2 shakePos = Random.insideUnitCircle * 0.1f;
+                renderer.transform.position += new Vector3(shakePos.x, 0, shakePos.y);
+            }
             
             yield return null;
         }
-        foreach (var collider in gameObject.GetComponentsInChildren<BoxCollider>())
-            collider.enabled = false;
+        foreach (var renderer in gameObject.GetComponentsInChildren<MeshRenderer>()) {
+            renderer.GetComponent<BoxCollider>().enabled = false;
+            renderer.material.color = transparentColor;
+        }
     }
 }
