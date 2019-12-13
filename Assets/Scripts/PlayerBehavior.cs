@@ -8,6 +8,7 @@ public class PlayerBehavior : MonoBehaviour {
     private float currentAcceleration = 0;
     [SerializeField] private float maxAccSide = 6;
     [SerializeField] private float accelerationRate = 20;
+    private float dyingForce = 8;
     private float ghostFadeDuration = 0.5f;
     private float ghostActiveDuration = 1.0f;
     private float ghostAlpha = 0.5f;
@@ -36,7 +37,9 @@ public class PlayerBehavior : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (paused) return;
+        if (!UIController.instance.GetGameOverPanel() && Input.GetKeyDown(KeyCode.Escape)) {
+            UIController.instance.SetPauseMenuPanel(!UIController.instance.GetPauseMenuPanel());
+        }
 
         //Move sidewise
         if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
@@ -46,6 +49,9 @@ public class PlayerBehavior : MonoBehaviour {
             else if (currentAcceleration > 0) currentAcceleration -= Time.deltaTime * accelerationRate / 1.25f;
             MoveSideScale(false);
         }
+        
+        if (paused) return;
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration > 0) currentAcceleration -= Time.deltaTime * accelerationRate;
@@ -63,11 +69,16 @@ public class PlayerBehavior : MonoBehaviour {
         if (transform.position.y < -5) GameOver();
 
         if (ghost && (Time.time - iniGhostTime) >= ghostActiveDuration) SetGhost(false);
+
+        //GetComponent<TrailRenderer>().colorGradient = new Gradient()
     }
 
     public void ObstacleHit ()
     {
-        if (!ghost) GameOver();
+        if (!ghost) {
+            GameOver();
+            GetComponent<Rigidbody>().AddForce(0, 0, dyingForce, ForceMode.Impulse);
+        }
     }
 
     public void GameOver()

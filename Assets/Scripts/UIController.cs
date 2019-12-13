@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject HUDPanel;
     [SerializeField] private GameObject progressBar;
+    [SerializeField] private GameObject pauseMenuPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,8 @@ public class UIController : MonoBehaviour
         gameOverPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
         gameOverPanel.SetActive(false);
         HUDPanel.SetActive(true);
+        pauseMenuPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
+        pauseMenuPanel.SetActive(false);
         SetProgress(0);
     }
 
@@ -44,6 +47,10 @@ public class UIController : MonoBehaviour
         if (b) mainCamera.GetComponent<CameraMove>().shake = true;
     }
 
+    public bool GetGameOverPanel() {
+        return gameOverPanel.activeSelf;
+    }
+
     public void SetProgress(float percent) {
         percent = Mathf.Clamp01(percent);
         float total = progressBar.GetComponent<RectTransform>().sizeDelta.y;
@@ -52,5 +59,14 @@ public class UIController : MonoBehaviour
         float posY = height / 2;
         progressHandle.sizeDelta = new Vector2(progressHandle.sizeDelta.x, height);
         progressHandle.anchoredPosition = new Vector2(progressHandle.anchoredPosition.x, posY);
+    }
+
+    public void SetPauseMenuPanel(bool b) {
+        Time.timeScale = b ? 0 : 1;
+        pauseMenuPanel.SetActive(b);
+    }
+
+    public bool GetPauseMenuPanel() {
+        return pauseMenuPanel.activeSelf;
     }
 }
