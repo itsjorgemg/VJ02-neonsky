@@ -22,7 +22,7 @@ public class PlayerBehavior : MonoBehaviour {
     private Vector3 iniScale;
     private Vector3 moveSideScale;
 
-    private bool paused = false;
+    public bool paused = false;
 
     // Start is called before the first frame update
     void Start()

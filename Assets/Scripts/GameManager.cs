@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     public int currentLevel { get; private set; } = 1;
 
+    [SerializeField] private GameObject godModePanel;
+    private bool godMode = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +27,32 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Level1Button").GetComponent<Button>().onClick.AddListener(() => instance.StartLevel(1));
         GameObject.Find("Level2Button").GetComponent<Button>().onClick.AddListener(() => instance.StartLevel(2));
         GameObject.Find("Level3Button").GetComponent<Button>().onClick.AddListener(() => instance.StartLevel(3));
+        DontDestroyOnLoad(godModePanel.transform.parent.gameObject);
+        godModePanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.BackQuote)) {
+            godMode = !godMode;
+            godModePanel.SetActive(godMode);
+        }
+        if (godMode) {
+            PlayerBehavior pl = GameObject.FindWithTag("Player").GetComponent<PlayerBehavior>();
+            if (Input.GetKeyDown(KeyCode.Space)) pl.paused = !pl.paused;
+            godModePanel.GetComponentsInChildren<Text>()[2].text = pl.paused.ToString();
+
+            if (Input.GetKeyDown(KeyCode.Z) || Input.GetKey(KeyCode.X)) {
+                UIController.instance.SetGameOverPanel(false);
+                UIController.instance.SetPauseMenuPanel(false);
+            }
+            if (Input.GetKey(KeyCode.X)) {
+                Transform tr = GameObject.FindWithTag("Player").transform;
+                tr.position = new Vector3(Mathf.Clamp(tr.position.x, 0.0f, 4.0f), 0.3f, tr.position.z);
+                pl.paused = false;
+            }
+        }
     }
 
     public void StartLevel (int lvl)
