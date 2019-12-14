@@ -39,6 +39,8 @@ public class JumpingTileBehavior : MonoBehaviour
             other.attachedRigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
             animate = true;
             startTime = Time.time;
+            other.gameObject.GetComponent<PlayerBehavior>().airborne = true;
+            other.GetComponentsInChildren<ParticleSystem>()[0].Pause(true);
         }
     }
 }
