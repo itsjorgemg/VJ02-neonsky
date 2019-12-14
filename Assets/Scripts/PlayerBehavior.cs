@@ -24,6 +24,8 @@ public class PlayerBehavior : MonoBehaviour {
 
     public bool paused = false;
 
+    private ParticleSystem tailParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class PlayerBehavior : MonoBehaviour {
         ghostColor = new Color(iniColor.r, iniColor.g, iniColor.b, ghostAlpha);
         iniScale = transform.localScale;
         moveSideScale = iniScale - new Vector3(iniScale.x / 8, 0, 0);
+        tailParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -110,5 +113,15 @@ public class PlayerBehavior : MonoBehaviour {
     {
         if (b) transform.localScale = Vector3.Lerp(transform.localScale, moveSideScale, Time.deltaTime * maxAccSide);
         else transform.localScale = Vector3.Lerp(transform.localScale, iniScale, Time.deltaTime * maxAccSide);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+        {
+            var main = tailParticles.main;
+            main.startColor = collision.gameObject.GetComponent<MeshRenderer>().material.color;
+        }
+            
     }
 }
