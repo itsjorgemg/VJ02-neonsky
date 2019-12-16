@@ -93,6 +93,8 @@ public class PlayerBehavior : MonoBehaviour {
         explosionParticles.Play(true);
         trailParticles.Stop(true);
         UIController.instance.SetGameOverPanel(true);
+        fadeCoroutine = Fade(true);
+        StartCoroutine(fadeCoroutine);
     }
 
     public void SetGhost(bool b)
@@ -109,7 +111,7 @@ public class PlayerBehavior : MonoBehaviour {
         Debug.Log("COIN!");
     }
 
-    IEnumerator Fade(bool b)
+    public IEnumerator Fade(bool b)
     {
         Color startColor = b ? iniColor : ghostColor;
         Color endColor = b ? ghostColor : iniColor;

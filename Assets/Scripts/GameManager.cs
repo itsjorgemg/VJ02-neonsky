@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
                 Transform tr = GameObject.FindWithTag("Player").transform;
                 tr.position = new Vector3(Mathf.Clamp(tr.position.x, 0.0f, 4.0f), 0.3f, tr.position.z);
                 pl.paused = false;
+                StartCoroutine(tr.GetComponent<PlayerBehavior>().Fade(false));
             }
         }
     }
