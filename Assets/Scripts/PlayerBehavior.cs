@@ -24,9 +24,11 @@ public class PlayerBehavior : MonoBehaviour {
 
     public bool paused = false;
 
-    private ParticleSystem tailParticles;
+    private ParticleSystem trailParticles;
+    private ParticleSystem landingParticles;
+    private ParticleSystem explosionParticles;
 
-    public bool airborne;
+    public bool airborne = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +38,11 @@ public class PlayerBehavior : MonoBehaviour {
         ghostColor = new Color(iniColor.r, iniColor.g, iniColor.b, ghostAlpha);
         iniScale = transform.localScale;
         moveSideScale = iniScale - new Vector3(iniScale.x / 8, 0, 0);
-        tailParticles = GetComponentInChildren<ParticleSystem>();
-        airborne = false;
+
+        ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
+        trailParticles = particles[0];
+        landingParticles = particles[1];
+        explosionParticles = particles[2];
     }
 
     // Update is called once per frame
@@ -85,6 +90,8 @@ public class PlayerBehavior : MonoBehaviour {
     public void GameOver()
     {
         paused = true;
+        explosionParticles.Play(true);
+        trailParticles.Stop(true);
         UIController.instance.SetGameOverPanel(true);
     }
 
@@ -123,11 +130,11 @@ public class PlayerBehavior : MonoBehaviour {
         if (collision.transform.CompareTag("Ground"))
         {
             if (airborne) {
-                GetComponentsInChildren<ParticleSystem>()[0].Play(true);
-                GetComponentsInChildren<ParticleSystem>()[1].Play(true);
+                trailParticles.Play(true);
+                landingParticles.Play(true);
                 airborne = false;
             }
-            var main = tailParticles.main;
+            var main = trailParticles.main;
             main.startColor = collision.gameObject.GetComponent<MeshRenderer>().material.color;
         }
             
