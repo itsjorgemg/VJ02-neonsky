@@ -10,10 +10,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject mainCamera;
 
-    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject HUDPanel;
     [SerializeField] private GameObject progressBar;
+    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject pauseMenuPanel;
+    [SerializeField] private GameObject levelCompletedPanel;
+    [SerializeField] private GameObject levelResult;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +26,13 @@ public class UIController : MonoBehaviour
             Destroy(gameObject);
         }
         
+        HUDPanel.SetActive(true);
         gameOverPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
         gameOverPanel.SetActive(false);
-        HUDPanel.SetActive(true);
         pauseMenuPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
         pauseMenuPanel.SetActive(false);
+        levelCompletedPanel.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
+        levelCompletedPanel.SetActive(false);
         SetProgress(0);
     }
 
@@ -53,6 +57,8 @@ public class UIController : MonoBehaviour
 
     public void SetProgress(float percent) {
         percent = Mathf.Clamp01(percent);
+        if (percent == 1) LevelCompleted();
+        
         float total = progressBar.GetComponent<RectTransform>().sizeDelta.y;
         RectTransform progressHandle = progressBar.GetComponentsInChildren<RectTransform>()[1];
         float height = total * percent;
@@ -68,5 +74,11 @@ public class UIController : MonoBehaviour
 
     public bool GetPauseMenuPanel() {
         return pauseMenuPanel.activeSelf;
+    }
+
+    public void LevelCompleted() {
+        levelCompletedPanel.SetActive(true);
+        levelResult.GetComponent<Text>().text = player.GetComponent<PlayerBehavior>().coins.ToString();
+        player.GetComponent<PlayerBehavior>().EndGame();
     }
 }

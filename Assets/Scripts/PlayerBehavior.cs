@@ -30,6 +30,8 @@ public class PlayerBehavior : MonoBehaviour {
 
     public bool airborne = false;
 
+    public int coins { get; private set; } = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +50,7 @@ public class PlayerBehavior : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!UIController.instance.GetGameOverPanel() && Input.GetKeyDown(KeyCode.Escape)) {
+        if (UIController.instance != null && !UIController.instance.GetGameOverPanel() && Input.GetKeyDown(KeyCode.Escape)) {
             UIController.instance.SetPauseMenuPanel(!UIController.instance.GetPauseMenuPanel());
         }
 
@@ -97,6 +99,12 @@ public class PlayerBehavior : MonoBehaviour {
         StartCoroutine(fadeCoroutine);
     }
 
+    public void EndGame()
+    {
+        paused = true;
+        trailParticles.Stop(true);
+    }
+
     public void SetGhost(bool b)
     {
         ghost = b;
@@ -108,7 +116,7 @@ public class PlayerBehavior : MonoBehaviour {
     }
 
     public void AddCoin() {
-        Debug.Log("COIN!");
+        coins++;
     }
 
     public IEnumerator Fade(bool b)
