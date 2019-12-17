@@ -46,13 +46,13 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public bool IsAnyPanelOpened() {
+        return gameOverPanel.activeSelf || levelCompletedPanel.activeSelf;
+    }
+
     public void SetGameOverPanel(bool b) {
         gameOverPanel.SetActive(b);
         if (b) mainCamera.GetComponent<CameraMove>().shake = true;
-    }
-
-    public bool GetGameOverPanel() {
-        return gameOverPanel.activeSelf;
     }
 
     public void SetProgress(float percent) {

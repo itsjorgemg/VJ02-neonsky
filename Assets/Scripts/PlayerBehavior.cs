@@ -50,7 +50,7 @@ public class PlayerBehavior : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (UIController.instance != null && !UIController.instance.GetGameOverPanel() && Input.GetKeyDown(KeyCode.Escape)) {
+        if (UIController.instance != null && !UIController.instance.IsAnyPanelOpened() && Input.GetKeyDown(KeyCode.Escape)) {
             UIController.instance.SetPauseMenuPanel(!UIController.instance.GetPauseMenuPanel());
         }
 
