@@ -53,6 +53,14 @@ public class UIController : MonoBehaviour
     public void SetGameOverPanel(bool b) {
         gameOverPanel.SetActive(b);
         if (b) mainCamera.GetComponent<CameraMove>().shake = true;
+        if (b) {
+            mainCamera.GetComponentsInChildren<AudioSource>()[0].Pause();
+            mainCamera.GetComponentsInChildren<AudioSource>()[1].Play();
+            player.GetComponentInChildren<AudioSource>().Play();
+        } else {
+            mainCamera.GetComponentsInChildren<AudioSource>()[0].UnPause();
+            mainCamera.GetComponentsInChildren<AudioSource>()[1].Stop();
+        }
     }
 
     public void SetProgress(float percent) {
@@ -70,6 +78,9 @@ public class UIController : MonoBehaviour
     public void SetPauseMenuPanel(bool b) {
         Time.timeScale = b ? 0 : 1;
         pauseMenuPanel.SetActive(b);
+        if (b) mainCamera.GetComponentsInChildren<AudioSource>()[0].Pause();
+        else mainCamera.GetComponentsInChildren<AudioSource>()[0].UnPause();
+        AudioListener.volume = b ? 0 : 1;
     }
 
     public bool GetPauseMenuPanel() {
@@ -77,8 +88,12 @@ public class UIController : MonoBehaviour
     }
 
     public void LevelCompleted() {
-        levelCompletedPanel.SetActive(true);
-        levelResult.GetComponent<Text>().text = player.GetComponent<PlayerBehavior>().coins.ToString();
-        player.GetComponent<PlayerBehavior>().EndGame();
+        if (!levelCompletedPanel.activeSelf) {
+            levelCompletedPanel.SetActive(true);
+            levelResult.GetComponent<Text>().text = player.GetComponent<PlayerBehavior>().coins.ToString();
+            player.GetComponent<PlayerBehavior>().EndGame();
+            mainCamera.GetComponentsInChildren<AudioSource>()[0].Stop();
+            mainCamera.GetComponentsInChildren<AudioSource>()[2].Play();
+        }
     }
 }

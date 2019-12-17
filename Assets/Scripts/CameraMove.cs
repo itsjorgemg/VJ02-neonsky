@@ -14,7 +14,6 @@ public class CameraMove : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponentsInChildren<AudioSource>()[0].Play();
         transform.position = objectToFollow.transform.position + offset;
         transform.Rotate(angle, 0.0f, 0.0f, Space.Self);
     }
