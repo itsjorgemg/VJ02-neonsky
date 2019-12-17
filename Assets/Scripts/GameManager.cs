@@ -53,6 +53,12 @@ public class GameManager : MonoBehaviour
                 pl.paused = false;
                 StartCoroutine(tr.GetComponent<PlayerBehavior>().Fade(false));
             }
+            if (Input.GetKeyDown(KeyCode.C)) {
+                pl.speedForward *= 2;
+            }
+            if (Input.GetKeyUp(KeyCode.C)) {
+                pl.speedForward /= 2;
+            }
         }
     }
 
