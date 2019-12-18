@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Level1Button").GetComponent<Button>().onClick.AddListener(() => instance.StartLevel(1));
         GameObject.Find("Level2Button").GetComponent<Button>().onClick.AddListener(() => instance.StartLevel(2));
         GameObject.Find("Level3Button").GetComponent<Button>().onClick.AddListener(() => instance.StartLevel(3));
+        GameObject.Find("ExitButton").GetComponent<Button>().onClick.AddListener(() => Application.Quit());
         DontDestroyOnLoad(godModePanel.transform.parent.gameObject);
         godModePanel.SetActive(false);
     }
