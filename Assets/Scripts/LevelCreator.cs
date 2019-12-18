@@ -11,6 +11,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] private GameObject[] tiles;
     [SerializeField] private GameObject[] collectibles;
     [SerializeField] private GameObject destinationObject;
+    [SerializeField] private GameObject mainCamera;
 
     public int levelLength { get; private set; } = 0;
 
@@ -28,6 +29,21 @@ public class LevelCreator : MonoBehaviour
             text = reader.ReadLine();
             levelLength = i;
         }
+        switch (GameManager.instance.currentLevel)
+        {
+            case 1:
+                mainCamera.GetComponentsInChildren<AudioSource>()[0].clip = Resources.Load<AudioClip>("Sounds/bensound-moose");
+                break;
+            case 2:
+                mainCamera.GetComponentsInChildren<AudioSource>()[0].clip = Resources.Load<AudioClip>("Sounds/waterflame-jumper");
+                break;
+            case 3:
+                mainCamera.GetComponentsInChildren<AudioSource>()[0].clip = Resources.Load<AudioClip>("Sounds/at-dooms-gate");
+                break;
+            default:
+                break;
+        }
+        mainCamera.GetComponentsInChildren<AudioSource>()[0].Play();
     }
 
     public void Restart() {

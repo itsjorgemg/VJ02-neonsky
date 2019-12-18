@@ -20,7 +20,7 @@ public class TravelTileBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground")) {
+        if (collision.gameObject.CompareTag("Ground") && collision.transform.position.x == transform.position.x) {
             holdingObject = null;
         }
     }
