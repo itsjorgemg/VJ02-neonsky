@@ -25,7 +25,9 @@ public class CoinBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player")) {
             other.gameObject.GetComponent<PlayerBehavior>().AddCoin();
-            Destroy(gameObject);
+            GetComponent<AudioSource>().Play();
+            transform.localScale = new Vector3(0, 0, 0);
+            GetComponent<Collider>().enabled = false;
         }
     }
 }

@@ -8,7 +8,6 @@ public class PlayerBehavior : MonoBehaviour {
     private float currentAcceleration = 0;
     [SerializeField] private float maxAccSide = 6;
     [SerializeField] private float accelerationRate = 20;
-    private float dyingForce = 8;
     private float ghostFadeDuration = 0.5f;
     private float ghostActiveDuration = 1.0f;
     private float ghostAlpha = 0.5f;
@@ -94,7 +93,8 @@ public class PlayerBehavior : MonoBehaviour {
         paused = true;
         explosionParticles.Play(true);
         trailParticles.Stop(true);
-        UIController.instance.SetGameOverPanel(true);
+        if (!UIController.instance.IsAnyPanelOpened())
+            UIController.instance.SetGameOverPanel(true);
         fadeCoroutine = Fade(true);
         StartCoroutine(fadeCoroutine);
     }

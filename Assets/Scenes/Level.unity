@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 246758281}
   - component: {fileID: 246758282}
   m_Layer: 0
-  m_Name: fanfare
+  m_Name: LevelCompletedSong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2140,7 +2140,7 @@ GameObject:
   - component: {fileID: 1802070890}
   - component: {fileID: 1802070891}
   m_Layer: 0
-  m_Name: kingdomhearts-dearlybeloved
+  m_Name: GameOverSong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
