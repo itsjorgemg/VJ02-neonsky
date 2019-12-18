@@ -29,7 +29,11 @@ public class UIController : MonoBehaviour
         HUDPanel.SetActive(true);
         gameOverPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
         gameOverPanel.SetActive(false);
-        pauseMenuPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
+        pauseMenuPanel.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => {
+            Time.timeScale = 1;
+            AudioListener.volume = 1;
+            GameManager.instance.LoadMainMenu();
+        });
         pauseMenuPanel.SetActive(false);
         levelCompletedPanel.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => GameManager.instance.LoadMainMenu());
         levelCompletedPanel.SetActive(false);
